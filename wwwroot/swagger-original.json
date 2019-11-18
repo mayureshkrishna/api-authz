@@ -1,0 +1,612 @@
+{
+  "openapi" : "3.0.0",
+  "info" : {
+    "title" : "Resource Access Management API",
+    "description" : "Resource Access Management API",
+    "contact" : {
+      "email" : "aac@deloitte.com"
+    },
+    "license" : {
+      "name" : "Apache 2.0",
+      "url" : "http://www.apache.org/licenses/LICENSE-2.0.html"
+    },
+    "version" : "1.0.0"
+  },
+  "servers" : [ {
+    "url" : "https://virtserver.swaggerhub.com/mayureshkrishna/ResourceAccessManagement/1.0.0",
+    "description" : "SwaggerHub API Auto Mocking"
+  }, {
+    "url" : "https://localhost:8080/security/resourceaccessmanagement/v1",
+    "description" : "Backend URI"
+  } ],
+  "tags" : [ {
+    "name" : "policy",
+    "description" : "Policy to enforce resource access"
+  }, {
+    "name" : "role",
+    "description" : "Roles"
+  }, {
+    "name" : "authorization",
+    "description" : "Authorizations enforcing access by policy and role"
+  } ],
+  "paths" : {
+    "/policies/{id}" : {
+      "get" : {
+        "tags" : [ "policy" ],
+        "summary" : "Retrieve Policy by Id",
+        "description" : "Get policy details by policy id\n",
+        "operationId" : "getPolicy",
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "description" : "ID of policy to return",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string",
+            "format" : "uuid"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Policy Details for the policy id",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Policy"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "bad input parameter"
+          }
+        }
+      },
+      "put" : {
+        "tags" : [ "policy" ],
+        "summary" : "Update Policy",
+        "description" : "Update policy to enforce resource access",
+        "operationId" : "updatePolicy",
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "description" : "ID of policy to update",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string",
+            "format" : "uuid"
+          }
+        } ],
+        "requestBody" : {
+          "description" : "Policy to Update",
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/Policy"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "200" : {
+            "description" : "policy updated"
+          },
+          "405" : {
+            "description" : "Invalid input"
+          }
+        }
+      },
+      "delete" : {
+        "tags" : [ "policy" ],
+        "summary" : "Delete Policy",
+        "description" : "Delete policy to enforce resource access",
+        "operationId" : "deletePolicy",
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "description" : "ID of policy to update",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string",
+            "format" : "uuid"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "policy deleted"
+          },
+          "405" : {
+            "description" : "Invalid input"
+          }
+        }
+      }
+    },
+    "/policies" : {
+      "post" : {
+        "tags" : [ "policy" ],
+        "summary" : "Create Policy",
+        "description" : "Create policy to enforce resource access",
+        "operationId" : "createPolicy",
+        "requestBody" : {
+          "description" : "Policy to add",
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/Policy"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "201" : {
+            "description" : "policy created"
+          },
+          "405" : {
+            "description" : "Invalid input"
+          }
+        }
+      }
+    },
+    "/roles/{id}" : {
+      "get" : {
+        "tags" : [ "role" ],
+        "summary" : "Retrieve Role by Id",
+        "description" : "Get Role details by Role id\n",
+        "operationId" : "getRole",
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "description" : "ID of Role to return",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string",
+            "format" : "uuid"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Role Details for the Role id",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Role"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "bad input parameter"
+          }
+        }
+      },
+      "put" : {
+        "tags" : [ "role" ],
+        "summary" : "Update Role",
+        "description" : "Update Role to enforce resource access",
+        "operationId" : "updateRole",
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "description" : "ID of Role to update",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string",
+            "format" : "uuid"
+          }
+        } ],
+        "requestBody" : {
+          "description" : "Role to Update",
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/Role"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "200" : {
+            "description" : "Role updated"
+          },
+          "405" : {
+            "description" : "Invalid input"
+          }
+        }
+      },
+      "delete" : {
+        "tags" : [ "role" ],
+        "summary" : "Delete Role",
+        "description" : "Delete Role to enforce resource access",
+        "operationId" : "deleteRole",
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "description" : "ID of Role to update",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string",
+            "format" : "uuid"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Role Deleted"
+          },
+          "405" : {
+            "description" : "Invalid input"
+          }
+        }
+      }
+    },
+    "/roles" : {
+      "post" : {
+        "tags" : [ "role" ],
+        "summary" : "Create Role",
+        "description" : "Create Role to enforce resource access",
+        "operationId" : "createRole",
+        "requestBody" : {
+          "description" : "Role to add",
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/Role"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "201" : {
+            "description" : "Role created"
+          },
+          "405" : {
+            "description" : "Invalid input"
+          }
+        }
+      }
+    },
+    "/authorizations/{id}" : {
+      "get" : {
+        "tags" : [ "authorization" ],
+        "summary" : "Retrieve authorization by Id",
+        "description" : "Get authorization details by authorization id\n",
+        "operationId" : "getAuthorization",
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "description" : "ID of authorization to return",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string",
+            "format" : "uuid"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "authorization Details for the authorization id",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Authorization"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "bad input parameter"
+          }
+        }
+      },
+      "put" : {
+        "tags" : [ "authorization" ],
+        "summary" : "Update authorization",
+        "description" : "Update authorization to enforce resource access",
+        "operationId" : "updateAuthorization",
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "description" : "ID of authorization to update",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string",
+            "format" : "uuid"
+          }
+        } ],
+        "requestBody" : {
+          "description" : "Authorization to Update",
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/Authorization"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "200" : {
+            "description" : "authorization updated"
+          },
+          "405" : {
+            "description" : "Invalid input"
+          }
+        }
+      },
+      "delete" : {
+        "tags" : [ "authorization" ],
+        "summary" : "Delete Authorization",
+        "description" : "Delete Authorization to enforce resource access",
+        "operationId" : "deleteAuthorization",
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "description" : "ID of authorization to update",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string",
+            "format" : "uuid"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "authorization Deleted"
+          },
+          "405" : {
+            "description" : "Invalid input"
+          }
+        }
+      }
+    },
+    "/authorizations/validate" : {
+      "get" : {
+        "tags" : [ "authorization" ],
+        "summary" : "Validate Authorization by Resource ID, User ID, Action and Scope",
+        "description" : "Validate Authorization by Resource ID, User ID, Action and Scope",
+        "operationId" : "validateAuthorization",
+        "parameters" : [ {
+          "name" : "resourceId",
+          "in" : "query",
+          "description" : "Resource to validate",
+          "required" : true,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string",
+            "format" : "uuid"
+          }
+        }, {
+          "name" : "userId",
+          "in" : "query",
+          "description" : "User ID to validate",
+          "required" : true,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string",
+            "example" : "dmkrishna"
+          }
+        }, {
+          "name" : "action",
+          "in" : "query",
+          "description" : "Action to validate",
+          "required" : true,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string",
+            "example" : "update"
+          }
+        }, {
+          "name" : "scopes",
+          "in" : "query",
+          "description" : "Scopes to validate",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "$ref" : "#/components/schemas/Scope"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "authorization Details for the search query",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Authorization"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Unauthorized"
+          }
+        }
+      }
+    },
+    "/authorizations" : {
+      "post" : {
+        "tags" : [ "authorization" ],
+        "summary" : "Create Authorization",
+        "description" : "Create Authorization to enforce resource access",
+        "operationId" : "createAuthorization",
+        "requestBody" : {
+          "description" : "Authorization to add",
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/Authorization"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "201" : {
+            "description" : "Authorization created"
+          },
+          "405" : {
+            "description" : "Invalid input"
+          }
+        }
+      }
+    }
+  },
+  "components" : {
+    "schemas" : {
+      "Policy" : {
+        "required" : [ "actions", "policyName", "resourceType" ],
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "string",
+            "format" : "uuid"
+          },
+          "policyName" : {
+            "type" : "string",
+            "example" : "ModifyRGAccessForSubscription"
+          },
+          "scopes" : {
+            "type" : "array",
+            "items" : {
+              "type" : "string",
+              "example" : "subscriptionId"
+            }
+          },
+          "actions" : {
+            "type" : "array",
+            "items" : {
+              "type" : "string",
+              "example" : "update"
+            }
+          },
+          "createDate" : {
+            "type" : "string",
+            "format" : "date-time",
+            "example" : "2016-08-29T09:12:33.001Z"
+          }
+        },
+        "example" : {
+          "policyName" : "ModifyRGAccessForSubscription",
+          "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+          "scopes" : [ "subscriptionId", "subscriptionId" ],
+          "actions" : [ "update", "update" ],
+          "createDate" : "2016-08-29T09:12:33.001Z"
+        }
+      },
+      "Role" : {
+        "required" : [ "id", "identities", "roleName" ],
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "string",
+            "format" : "uuid"
+          },
+          "roleName" : {
+            "type" : "string",
+            "example" : "AAC Admin"
+          },
+          "createDate" : {
+            "type" : "string",
+            "format" : "date-time",
+            "example" : "2016-08-29T09:12:33.001Z"
+          },
+          "identities" : {
+            "$ref" : "#/components/schemas/Identities"
+          }
+        },
+        "example" : {
+          "identities" : {
+            "groups" : [ "azureModifyGroup", "azureModifyGroup" ],
+            "users" : [ "dmkrishna", "dmkrishna" ]
+          },
+          "roleName" : "AAC Admin",
+          "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+          "createDate" : "2016-08-29T09:12:33.001Z"
+        }
+      },
+      "Identities" : {
+        "required" : [ "users" ],
+        "type" : "object",
+        "properties" : {
+          "users" : {
+            "type" : "array",
+            "items" : {
+              "type" : "string",
+              "example" : "dmkrishna"
+            }
+          },
+          "groups" : {
+            "type" : "array",
+            "items" : {
+              "type" : "string",
+              "example" : "azureModifyGroup"
+            }
+          }
+        },
+        "example" : {
+          "groups" : [ "azureModifyGroup", "azureModifyGroup" ],
+          "users" : [ "dmkrishna", "dmkrishna" ]
+        }
+      },
+      "Authorization" : {
+        "required" : [ "id", "policyId", "resourceId", "roleId" ],
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "string",
+            "format" : "uuid"
+          },
+          "resourceId" : {
+            "type" : "string",
+            "format" : "uuid"
+          },
+          "roleId" : {
+            "type" : "string",
+            "format" : "uuid"
+          },
+          "policyId" : {
+            "type" : "string",
+            "format" : "uuid"
+          },
+          "scopeMap" : {
+            "$ref" : "#/components/schemas/Scope"
+          }
+        },
+        "example" : {
+          "resourceId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+          "policyId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+          "roleId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+          "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+          "scopeMap" : {
+            "subscriptionId" : "76dd03b7-7e84-4846-aede-47290fdd9a3f"
+          }
+        }
+      },
+      "Scope" : {
+        "type" : "object",
+        "additionalProperties" : {
+          "type" : "string"
+        },
+        "example" : {
+          "subscriptionId" : "76dd03b7-7e84-4846-aede-47290fdd9a3f"
+        }
+      }
+    }
+  }
+}
